@@ -116,6 +116,7 @@ Berikut penjelasan dari perintah yang dijalankan di balik layar:
 
 ```
 npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
+
 ```
 
 | Bagian | Artinya |
@@ -175,14 +176,14 @@ Setelah itu, buka repositorimu di GitHub dan buat **Pull Request** dari branch `
 
 Pastikan semua poin ini sudah terpenuhi sebelum kamu mengumpulkan:
 
-- [ ] Semua styling menggunakan Tailwind utility class
-- [ ] Tidak ada custom CSS (kecuali `@apply` jika digunakan)
-- [ ] Navbar sudah ada dan berfungsi
-- [ ] Hero section sudah ada
-- [ ] Footer sudah ada
+- [✔️] Semua styling menggunakan Tailwind utility class
+- [✔️] Tidak ada custom CSS (kecuali `@apply` jika digunakan)
+- [✔️] Navbar sudah ada dan berfungsi
+- [✔️] Hero section sudah ada
+- [✔️] Footer sudah ada
 - [ ] Halaman responsif di mobile dan desktop
 - [ ] Tailwind breakpoints (`sm:`, `md:`, `lg:`) digunakan sesuai kebutuhan
-- [ ] Kode rapi, indentasi benar, tidak ada kode yang tidak terpakai
+- [✔️] Kode rapi, indentasi benar, tidak ada kode yang tidak terpakai
 - [ ] Project sudah di-push ke GitHub di branch `feat/tailwind`
 - [ ] Pull Request sudah dibuat di GitHub
 

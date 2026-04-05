@@ -1,1 +1,461 @@
 @import "tailwindcss";
+
+@theme {
+  /* Default Theme (Dark) */
+  --color-bg: #000000;
+  --color-bg-secondary: #0d0d0d;
+  --color-bg-card: #111111;
+  --color-accent: #421ABC;
+  --color-border: #1e1e1e;
+  --color-pfont: #a0a0a0;
+  --color-hfont: #ffffff;
+  --color-hero-gradient-end: #120a2a;
+ 
+  
+  --spacing-header: 64px;
+}
+
+/* Light Mode */
+[data-theme="light"] {
+  --color-bg: #f5f5f7;
+  --color-bg-secondary: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-border: #d1d1d1;
+  --color-pfont: #555555;
+  --color-hfont: #111111;
+}
+
+/* basic */
+
+@layer base {
+  body {
+    @apply bg-bg text-pfont transition-colors duration-300 ease-in-out;
+  }
+
+  h1, h2, h3 {
+    @apply text-hfont bg-transparent;
+  }
+
+  a {
+    @apply text-hfont no-underline bg-transparent;
+  }
+
+  img {
+    @apply block max-w-full;
+  }
+}
+
+/* navbar, header */
+
+@layer components {
+  header {
+    @apply w-full h-header sticky top-0 z-1000 flex justify-between items-center px-35;
+    @apply bg-bg border-b border-border transition-colors duration-300 ease-in;
+  }
+
+  .tech {
+    @apply font-black text-[22px] whitespace-nowrap bg-transparent text-hfont;
+  }
+
+  .navbar1 ul {
+    @apply flex gap-10 list-none;
+  }
+
+  .navbar1 ul li a {
+    @apply font-normal text-[15px] text-pfont transition-colors duration-250 ease-in;
+  }
+
+  .navbar1 ul li a:hover {
+    @apply text-hfont;
+  }
+
+  /* theme togel button */
+  .theme-toggle {
+    @apply w-10.5 h-10.5 rounded-full shrink-0 flex items-center justify-center p-0 cursor-pointer text-[18px];
+    @apply bg-bg-card border border-border transition-colors duration-300;
+  }
+
+  .theme-toggle:hover {
+    @apply bg-accent border-accent;
+  }
+
+  /* switching theme */
+  .theme-icon { @apply bg-transparent leading-none; }
+  [data-theme="dark"] .theme-icon.sun { @apply hidden; }
+  [data-theme="dark"] .theme-icon.moon { @apply block; }
+  [data-theme="light"] .theme-icon.sun { @apply block; }
+  [data-theme="light"] .theme-icon.moon { @apply hidden; }
+}
+
+/* button */
+@layer base {
+  button {
+ 
+    @apply px-7 py-3 rounded-full bg-accent border-none cursor-pointer opacity-85;
+    
+    
+    @apply transition-all duration-300;
+  }
+
+  button:hover {
+    @apply opacity-100;
+  }
+}
+
+@layer components {
+  .button1 a,
+  .button2 a {
+    @apply text-hfont text-[15px] font-semibold bg-transparent;
+  }
+
+
+  .button2 {
+    @apply px-9 py-3.5;
+  }
+}
+
+/* hidden hamburger */
+
+@layer components {
+  .hamburger {
+    @apply hidden flex-col justify-center items-center gap-1.25 w-10 h-10;
+    
+    @apply p-0 bg-transparent border-none cursor-pointer rounded-lg opacity-100;
+  }
+}
+
+/* three lined hamburger */
+
+@layer components {
+  /* Hamburger 3 garis */
+  .hamburger span {
+    /* Layout & Sizing */
+    @apply block w-5.5 h-0.5 rounded-xs;
+
+    @apply bg-hfont;
+
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .desktop-only {
+    @apply flex;
+  }
+}
+
+/* slide out */
+
+@layer components {
+  .mobile-menu {
+    @apply fixed top-0 right-full w-[85%] max-w-85 h-screen z-2000 p-6;
+    @apply flex flex-col border-l border-border bg-bg-card;
+    /* Custom Bezier for a smoother "premium" slide effect */
+    @apply transition-[right] duration-350ms ease-in-out}
+
+  .mobile-menu.open { @apply right-0; }
+
+  /* Header inside Menu */
+  .mobile-menu-header {
+    @apply flex items-center justify-between mb-10 bg-transparent;
+  }
+
+  /* Close Button */
+  .close-btn {
+    @apply bg-transparent border-none text-hfont text-[22px] cursor-pointer px-2 py-1 rounded-md opacity-70 transition-opacity duration-200;
+  }
+  .close-btn:hover { @apply opacity-100; }
+
+  /* Navigation Links */
+  .mobile-nav ul { @apply list-none flex flex-col; }
+  .mobile-nav ul li { @apply border-b border-border; }
+  
+  .mobile-nav ul li a {
+    @apply block py-4 px-1 text-[17px] font-normal text-hfont transition-colors duration-250 ease-in;
+   
+  }
+  .mobile-nav ul li a:hover { @apply text-accent; }
+
+  /* CTA Button Area */
+  .mobile-cta { @apply mt-8 w-full; }
+  .mobile-cta a { @apply block w-full; }
+
+  /* Background Overlay */
+  .overlay {
+    @apply fixed inset-0 z-1500 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-350 ease-in-out;
+  }
+  .overlay.active {
+    @apply opacity-100 pointer-events-auto; }
+  }
+
+
+/* hero */
+
+@layer components {
+  .hero {
+    @apply w-full min-h-160 flex justify-center items-center overflow-hidden;
+
+    @apply bg-[linear-gradient(to_bottom,var(--color-bg)_30%,var(--color-hero-gradient-end))];
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  .hero_container {
+    @apply w-[90%] max-w-300 flex items-center justify-between bg-transparent gap-10;
+  }
+
+  .hero_content {
+    @apply flex-1 bg-transparent;
+  }
+
+  .hero_content h1 {
+    @apply text-[3.5rem] font-bold mb-5 leading-[1.1] text-hfont;
+  }
+
+  .hero_content h1 span {
+    @apply italic bg-transparent;
+  }
+
+  .hero_content p {
+    @apply text-[1.1rem] leading-[1.7] mb-8 max-w-150 text-pfont;
+  }
+
+  .hero_image {
+    @apply flex-1 flex justify-end self-end bg-transparent;
+  }
+
+  .hero_image img {
+    @apply max-w-full h-auto object-cover bg-transparent;
+  }
+}
+
+/* who we are section */
+
+@layer components {
+  /* Who We Are Section */
+  .about {
+    @apply min-h-[40vh] flex justify-center items-center px-5 py-15;
+    @apply bg-bg transition-colors duration-300;
+  }
+
+  .about_container {
+    @apply w-[90%] max-w-225 text-center;
+  }
+
+  .about_content h2 {
+    @apply text-[2.2rem] font-bold mb-5 text-hfont;
+  }
+
+  .about_content p {
+    @apply text-[1.5rem] font-medium leading-[1.6] text-pfont;
+  }
+
+  .about_content p span {
+    /* Using hfont for emphasized text inside paragraphs */
+    @apply text-hfont font-semibold;
+  }
+}
+
+/* what wae do */
+
+@layer components {
+  /* What We Do Section */
+  .do {
+    @apply py-15 px-5 flex justify-center items-center bg-bg transition-colors duration-300;
+  }
+
+  .do_container {
+    @apply w-[90%] max-w-275;
+  }
+
+  /* Section Header */
+  .header {
+    @apply text-center bg-transparent;
+  }
+
+  .header h2 {
+    @apply text-[2.2rem] font-bold mb-3 text-hfont;
+  }
+
+  .header p {
+    @apply text-[1.1rem] mb-12 text-pfont;
+  }
+
+  /* Grid Layout */
+  .do_content {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+  }
+
+  /* Card Component */
+  .card {
+    @apply border border-border rounded-[14px] px-5 py-8 flex flex-col justify-center items-center text-center gap-4;
+    @apply bg-bg-card transition-all duration-300 ease-in-out;
+  }
+
+  .card:hover {
+    @apply border-accent -translate-y-1;
+  }
+
+  .card img {
+    @apply w-16 h-16 object-contain bg-transparent;
+  }
+
+  .card h3 {
+    @apply text-[1.1rem] font-semibold text-hfont;
+  }
+
+  .card p {
+    @apply text-[0.95rem] leading-normal text-pfont;
+  }
+}
+
+/* porto */
+
+@layer components {
+  /* Portfolio Section */
+  #our_work {
+    @apply py-15 px-5 bg-bg transition-colors duration-300;
+  }
+
+  .our_head {
+    @apply text-center mb-10;
+  }
+
+  .our_head h2 {
+    @apply text-[2.2rem] font-bold mb-3 text-hfont;
+  }
+
+  .our_head p {
+    @apply text-[1.1rem] text-pfont;
+  }
+
+  /* Portfolio Grid/Flex Wrapper */
+  .porto {
+    @apply flex justify-center flex-wrap gap-6 px-10;
+  }
+
+  /* Individual Portfolio Items */
+  .porto > div {
+    @apply flex-1 min-w-55 max-w-95 bg-transparent;
+  }
+
+  .porto > div h3 {
+    @apply text-[1.1rem] font-bold mt-3.5 text-hfont;
+  }
+
+  /* The Image Card */
+  .porto_card {
+    @apply rounded-[14px] w-full object-cover;
+    @apply border border-border;
+  }
+}
+
+@layer components {
+  /* Meet the Team Section */
+  .section5 {
+    @apply py-25 px-5 bg-bg transition-colors duration-300;
+  }
+
+  .team_head {
+    @apply text-center mb-14;
+  }
+
+  .team_head h2 {
+    @apply text-[2.8rem] font-bold mb-3 text-hfont;
+  }
+
+  .team_head p {
+    @apply text-[1.2rem] text-pfont;
+  }
+
+  /* Team Grid/Flex Wrapper */
+  .staff {
+    @apply flex justify-center items-start gap-20 flex-wrap max-w-275 mx-auto;
+  }
+
+  /* Individual Team Member */
+  .staff > div {
+    @apply flex flex-col items-center text-center bg-transparent;
+  }
+
+  /* Profile Picture */
+  .staff > div img {
+    @apply w-50 h-50 rounded-full object-cover;
+    /* Optional: subtle border for light mode visibility */
+    @apply border-2 border-border;
+  }
+
+  /* Name and Role */
+  .staff > div h3 {
+    @apply text-[1.2rem] font-bold mt-4.5 mb-1.5 text-hfont;
+  }
+
+  .staff > div p {
+    @apply text-[1rem] text-pfont;
+  }
+}
+
+@layer components {
+  /* Contact Form Section */
+  .section6 {
+    @apply py-20 px-5 flex justify-center items-center bg-bg transition-colors duration-300;
+  }
+
+  .form {
+    @apply w-full max-w-[560] text-center bg-transparent;
+  }
+
+  .form h2 {
+    @apply text-[2.2rem] font-bold mb-2.5 text-hfont;
+  }
+
+  .form > p {
+    @apply text-[1.1rem] mb-10 text-pfont;
+  }
+
+  /* Fieldset Reset */
+  .form form fieldset {
+    @apply border-none text-left;
+  }
+
+  .label_input {
+    @apply flex flex-col gap-1.5;
+  }
+
+  /* Form Labels */
+  .form form fieldset label {
+    @apply text-[14px] font-medium mt-3.5 text-pfont;
+    /* Note: Using text-pfont ensures labels are readable in both modes */
+  }
+
+  /* Input & Textarea Styling */
+  .form form fieldset input,
+  .form form fieldset textarea {
+    @apply px-4 py-3 border border-border rounded-lg w-full text-[14px] outline-none;
+    @apply bg-bg-card text-hfont transition-all duration-300 ease-in-out;
+  }
+
+  /* Focus States */
+  .form form fieldset input:focus,
+  .form form fieldset textarea:focus {
+    @apply border-accent;
+  }
+
+  .form form fieldset textarea {
+    @apply resize-y min-h-30;
+  }
+
+  /* Submit Button (button3) */
+  .button3 {
+    @apply w-full mt-6 p-3.5 text-[16px] font-semibold text-white rounded-[50px] bg-accent;
+    @apply transition-opacity duration-200 hover:opacity-90;
+  }
+}
+
+@layer components {
+  /* Footer Section */
+  footer {
+    @apply text-center py-6 px-4 border-t border-border bg-bg transition-colors duration-300;
+  }
+
+  footer p {
+    @apply text-[13px] text-pfont;
+  }
+}
