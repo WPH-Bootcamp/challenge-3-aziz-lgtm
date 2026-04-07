@@ -116,7 +116,6 @@ Berikut penjelasan dari perintah yang dijalankan di balik layar:
 
 ```
 npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch
-
 ```
 
 | Bagian | Artinya |

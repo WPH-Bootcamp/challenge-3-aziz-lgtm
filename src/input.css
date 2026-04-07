@@ -1,22 +1,21 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Default Theme (Dark) */
   --color-bg: #000000;
   --color-bg-secondary: #0d0d0d;
   --color-bg-card: #111111;
-  --color-accent: #421ABC;
+  --color-accent: #421abc;
   --color-border: #1e1e1e;
   --color-pfont: #a0a0a0;
   --color-hfont: #ffffff;
   --color-hero-gradient-end: #120a2a;
- 
-  
+
   --spacing-header: 64px;
 }
 
 /* Light Mode */
-[data-theme="light"] {
+[data-theme='light'] {
   --color-bg: #f5f5f7;
   --color-bg-secondary: #ffffff;
   --color-bg-card: #ffffff;
@@ -32,7 +31,9 @@
     @apply bg-bg text-pfont transition-colors duration-300 ease-in-out;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     @apply text-hfont bg-transparent;
   }
 
@@ -49,7 +50,9 @@
 
 @layer components {
   header {
-    @apply w-full h-header sticky top-0 z-1000 flex justify-between items-center px-35;
+    @apply w-full h-[60px] sticky top-0 z-1000 flex justify-between items-center px-6;
+    @apply md:px-16; /*responsive*/
+    @apply lg:px-35  /*responsive*/h-header;
     @apply bg-bg border-b border-border transition-colors duration-300 ease-in;
   }
 
@@ -57,8 +60,16 @@
     @apply font-black text-[22px] whitespace-nowrap bg-transparent text-hfont;
   }
 
+  .navbar1 {
+    @apply hidden;
+    @apply md:flex; /*responsive*/
+    @apply lg:flex; /*responsive*/
+  }
+
   .navbar1 ul {
-    @apply flex gap-10 list-none;
+    @apply flex gap-3 list-none;
+    @apply md:gap-6; /*responsive*/
+    @apply lg:gap-10 lg:flex lg:list-none; /*responsive*/
   }
 
   .navbar1 ul li a {
@@ -80,20 +91,28 @@
   }
 
   /* switching theme */
-  .theme-icon { @apply bg-transparent leading-none; }
-  [data-theme="dark"] .theme-icon.sun { @apply hidden; }
-  [data-theme="dark"] .theme-icon.moon { @apply block; }
-  [data-theme="light"] .theme-icon.sun { @apply block; }
-  [data-theme="light"] .theme-icon.moon { @apply hidden; }
+  .theme-icon {
+    @apply bg-transparent leading-none;
+  }
+  [data-theme='dark'] .theme-icon.sun {
+    @apply hidden;
+  }
+  [data-theme='dark'] .theme-icon.moon {
+    @apply block;
+  }
+  [data-theme='light'] .theme-icon.sun {
+    @apply block;
+  }
+  [data-theme='light'] .theme-icon.moon {
+    @apply hidden;
+  }
 }
 
 /* button */
 @layer base {
   button {
- 
     @apply px-7 py-3 rounded-full bg-accent border-none cursor-pointer opacity-85;
-    
-    
+
     @apply transition-all duration-300;
   }
 
@@ -108,9 +127,10 @@
     @apply text-hfont text-[15px] font-semibold bg-transparent;
   }
 
-
   .button2 {
-    @apply px-9 py-3.5;
+    @apply px-5 py-2;
+    @apply md:px-7 md:py-3; /*responsive*/
+    @apply lg:px-9 lg:py-3.5; /*responsive*/
   }
 }
 
@@ -118,9 +138,11 @@
 
 @layer components {
   .hamburger {
-    @apply hidden flex-col justify-center items-center gap-1.25 w-10 h-10;
-    
+    @apply flex-col justify-center items-center gap-1.25 w-10 h-10;
+
     @apply p-0 bg-transparent border-none cursor-pointer rounded-lg opacity-100;
+
+    @apply lg:hidden; /*responsive*/
   }
 }
 
@@ -138,7 +160,9 @@
   }
 
   .desktop-only {
-    @apply flex;
+    @apply hidden;
+    @apply md:flex; /*responsive*/
+    @apply lg:flex; /*responsive*/
   }
 }
 
@@ -149,9 +173,12 @@
     @apply fixed top-0 right-full w-[85%] max-w-85 h-screen z-2000 p-6;
     @apply flex flex-col border-l border-border bg-bg-card;
     /* Custom Bezier for a smoother "premium" slide effect */
-    @apply transition-[right] duration-350ms ease-in-out}
+    @apply transition-[right] duration-350 ease-in-out;
+  }
 
-  .mobile-menu.open { @apply right-0; }
+  .mobile-menu.open {
+    @apply right-0;
+  }
 
   /* Header inside Menu */
   .mobile-menu-header {
@@ -162,51 +189,73 @@
   .close-btn {
     @apply bg-transparent border-none text-hfont text-[22px] cursor-pointer px-2 py-1 rounded-md opacity-70 transition-opacity duration-200;
   }
-  .close-btn:hover { @apply opacity-100; }
+  .close-btn:hover {
+    @apply opacity-100;
+  }
 
   /* Navigation Links */
-  .mobile-nav ul { @apply list-none flex flex-col; }
-  .mobile-nav ul li { @apply border-b border-border; }
-  
+  .mobile-nav ul {
+    @apply list-none flex flex-col;
+  }
+  .mobile-nav ul li {
+    @apply border-b border-border;
+  }
+
   .mobile-nav ul li a {
     @apply block py-4 px-1 text-[17px] font-normal text-hfont transition-colors duration-250 ease-in;
-   
   }
-  .mobile-nav ul li a:hover { @apply text-accent; }
+  .mobile-nav ul li a:hover {
+    @apply text-accent;
+  }
 
   /* CTA Button Area */
-  .mobile-cta { @apply mt-8 w-full; }
-  .mobile-cta a { @apply block w-full; }
+  .mobile-cta {
+    @apply mt-8 w-full;
+  }
+  .mobile-cta a {
+    @apply block w-full;
+  }
 
   /* Background Overlay */
   .overlay {
     @apply fixed inset-0 z-1500 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-350 ease-in-out;
   }
   .overlay.active {
-    @apply opacity-100 pointer-events-auto; }
+    @apply opacity-100 pointer-events-auto;
   }
-
+}
 
 /* hero */
 
 @layer components {
   .hero {
-    @apply w-full min-h-160 flex justify-center items-center overflow-hidden;
+    @apply w-full flex justify-center overflow-hidden;
+
+    @apply min-h-0 pt-12 items-start;
+
+    @apply md:min-h-160 md:pt-0 md:items-center; /*responsive*/
+
+    @apply lg:min-h-160 lg:pt-0 lg:items-center;
 
     @apply bg-[linear-gradient(to_bottom,var(--color-bg)_30%,var(--color-hero-gradient-end))];
     @apply transition-colors duration-300 ease-in-out;
   }
 
   .hero_container {
-    @apply w-[90%] max-w-300 flex items-center justify-between bg-transparent gap-10;
+    @apply w-full px-6 flex flex-col items-start gap-0 bg-transparent;
+    @apply md:w-[90%] md:max-w-300 md:flex-row md:items-center md:justify-between md:gap-10 md:px-0;
+    @apply lg:w-[90%] lg:max-w-300 lg:flex-row lg:items-center lg:justify-between lg:gap-10;
   }
 
   .hero_content {
-    @apply flex-1 bg-transparent;
+    @apply w-full bg-transparent;
+    @apply md:flex-1 md:pb-1;
+    @apply lg:flex-1 md:pb-1; /*responsive*/
   }
 
   .hero_content h1 {
-    @apply text-[3.5rem] font-bold mb-5 leading-[1.1] text-hfont;
+    @apply text-[2.9rem] sm:text-[2.2rem] md:text-[3.5rem] lg:text-[3.5rem];
+    @apply font-bold mb-4 md:mb-5 lg:mb-5 leading-[1.1] text-hfont; /*responsive*/
   }
 
   .hero_content h1 span {
@@ -218,7 +267,9 @@
   }
 
   .hero_image {
-    @apply flex-1 flex justify-end self-end bg-transparent;
+    @apply w-full flex justify-center bg-transparent;
+    @apply md:flex-1 md:justify-end md:self-end;
+    @apply lg:flex-1 lg:justify-end lg:self-end;
   }
 
   .hero_image img {
@@ -231,7 +282,9 @@
 @layer components {
   /* Who We Are Section */
   .about {
-    @apply min-h-[40vh] flex justify-center items-center px-5 py-15;
+    @apply min-h-[40vh] flex justify-center items-center px-5 py-12;
+    @apply md:px-6 md:py-15;
+    @apply lg:px-6 lg:py-15;
     @apply bg-bg transition-colors duration-300;
   }
 
@@ -240,11 +293,16 @@
   }
 
   .about_content h2 {
-    @apply text-[2.2rem] font-bold mb-5 text-hfont;
+    @apply text-[1.8rem];
+    @apply md:text-[2.2rem];
+    @apply lg:text-[2.2rem];
+    @apply font-bold mb-5 text-hfont;
   }
 
   .about_content p {
-    @apply text-[1.5rem] font-medium leading-[1.6] text-pfont;
+    @apply text-[1.1rem] font-medium leading-[1.6] text-pfont;
+    @apply md:text-[1.5rem];
+    @apply lg:text-[1.5rem];
   }
 
   .about_content p span {
@@ -256,13 +314,15 @@
 /* what wae do */
 
 @layer components {
-  /* What We Do Section */
   .do {
-    @apply py-15 px-5 flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply py-12 px-4 flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply md:py-15 md:px-5;
+    @apply lg:py-15 md:px-5;
   }
 
   .do_container {
-    @apply w-[90%] max-w-275;
+    @apply w-full;
+    @apply md:w-[90%] md:max-w-275;
   }
 
   /* Section Header */
@@ -280,12 +340,17 @@
 
   /* Grid Layout */
   .do_content {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+    @apply grid grid-cols-2 gap-2.5;
+    @apply md:grid-cols-3 md:gap-4;
+    @apply lg:grid-cols-3 lg:gap-4;
   }
 
   /* Card Component */
   .card {
-    @apply border border-border rounded-[14px] px-5 py-8 flex flex-col justify-center items-center text-center gap-4;
+    @apply border border-border rounded-[14px] px-2.5 py-[18px];
+    @apply md:px-5 md:py-8;
+    @apply lg:px-5 lg:py-8;
+    @apply flex flex-col justify-center items-center text-center gap-4;
     @apply bg-bg-card transition-all duration-300 ease-in-out;
   }
 
@@ -294,7 +359,9 @@
   }
 
   .card img {
-    @apply w-16 h-16 object-contain bg-transparent;
+    @apply w-13 h-13 object-contain bg-transparent;
+    @apply md:w-16 md:h-16;
+    @apply lg:w-16 lg:h-16;
   }
 
   .card h3 {
@@ -319,7 +386,7 @@
   }
 
   .our_head h2 {
-    @apply text-[2.2rem] font-bold mb-3 text-hfont;
+    @apply text-[2.8rem] font-bold mb-3 text-hfont;
   }
 
   .our_head p {
@@ -333,7 +400,7 @@
 
   /* Individual Portfolio Items */
   .porto > div {
-    @apply flex-1 min-w-55 max-w-95 bg-transparent;
+    @apply flex-1 min-w-55 bg-transparent;
   }
 
   .porto > div h3 {
