@@ -61,10 +61,10 @@ wph-assignment-3/
 
 ### Wajib Dipenuhi
 
-- [ ] Semua styling menggunakan **Tailwind CSS** saja, tidak boleh ada custom CSS kecuali `@apply`
-- [ ] Halaman harus **responsif**, tampil baik di mobile maupun desktop
-- [ ] Gunakan utility class Tailwind untuk semua keperluan styling: spacing, typography, warna, dan layout
-- [ ] Tidak boleh ada CSS tradisional seperti `.nama-class { color: red }`
+- [✔️] Semua styling menggunakan **Tailwind CSS** saja, tidak boleh ada custom CSS kecuali `@apply`
+- [✔️] Halaman harus **responsif**, tampil baik di mobile maupun desktop
+- [✔️] Gunakan utility class Tailwind untuk semua keperluan styling: spacing, typography, warna, dan layout
+- [✔️] Tidak boleh ada CSS tradisional seperti `.nama-class { color: red }`
 
 ### Komponen Minimum
 
