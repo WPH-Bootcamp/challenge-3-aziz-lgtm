@@ -1,39 +1,61 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap'); /*font inter*/
+@import 'tailwindcss';
 
 @theme {
   /* Default Theme (Dark) */
   --color-bg: #000000;
   --color-bg-secondary: #0d0d0d;
   --color-bg-card: #111111;
-  --color-accent: #421ABC;
+  --color-bg-input: #0d0d0d;
+  --color-accent: #421abc;
+  --color-accent-hover: #5536d4;
   --color-border: #1e1e1e;
   --color-pfont: #a0a0a0;
   --color-hfont: #ffffff;
   --color-hero-gradient-end: #120a2a;
- 
-  
+  --color-footer-bg: #000000;
+
   --spacing-header: 64px;
 }
 
 /* Light Mode */
-[data-theme="light"] {
+[data-theme='light'] {
   --color-bg: #f5f5f7;
   --color-bg-secondary: #ffffff;
   --color-bg-card: #ffffff;
+  --color-bg-input: #f0f0f0;
+  --color-hero-gradient-end: #e8e0ff;
   --color-border: #d1d1d1;
   --color-pfont: #555555;
   --color-hfont: #111111;
+  --color-footer-bg: #e8e8e8;
 }
 
-/* basic */
+/* reset & base */
 
-@layer base {
+@layer components {
+  *,
+  *::before,
+  *::after {
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-bg text-pfont transition-colors duration-300 ease-in-out;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     @apply text-hfont bg-transparent;
+  }
+
+  p {
+    @apply text-pfont bg-transparent;
   }
 
   a {
@@ -45,11 +67,13 @@
   }
 }
 
-/* navbar, header */
+/* header/navbar */
 
 @layer components {
   header {
-    @apply w-full h-header sticky top-0 z-1000 flex justify-between items-center px-35;
+    @apply w-full h-[60px] lg:h-header sticky top-0 z-1000;
+    @apply flex justify-between items-center;
+    @apply px-8 lg:px-[140px];
     @apply bg-bg border-b border-border transition-colors duration-300 ease-in;
   }
 
@@ -57,156 +81,179 @@
     @apply font-black text-[22px] whitespace-nowrap bg-transparent text-hfont;
   }
 
+  .navbar1 {
+    @apply hidden md:flex items-center;
+  }
+
   .navbar1 ul {
-    @apply flex gap-10 list-none;
+    @apply flex list-none gap-6 lg:gap-10;
   }
 
   .navbar1 ul li a {
-    @apply font-normal text-[15px] text-pfont transition-colors duration-250 ease-in;
+    @apply font-normal text-[15px] text-pfont transition-colors duration-300 ease-in;
   }
 
   .navbar1 ul li a:hover {
     @apply text-hfont;
   }
 
-  /* theme togel button */
+  .header-right {
+    @apply flex items-center gap-3 bg-transparent;
+  }
+
+  /* theme togel */
   .theme-toggle {
-    @apply w-10.5 h-10.5 rounded-full shrink-0 flex items-center justify-center p-0 cursor-pointer text-[18px];
+    @apply w-[42px] h-[42px] rounded-full shrink-0 opacity-100;
+    @apply flex items-center justify-center p-0 cursor-pointer text-[18px];
     @apply bg-bg-card border border-border transition-colors duration-300;
   }
 
   .theme-toggle:hover {
-    @apply bg-accent border-accent;
+    @apply opacity-100 bg-accent border-accent;
   }
 
-  /* switching theme */
-  .theme-icon { @apply bg-transparent leading-none; }
-  [data-theme="dark"] .theme-icon.sun { @apply hidden; }
-  [data-theme="dark"] .theme-icon.moon { @apply block; }
-  [data-theme="light"] .theme-icon.sun { @apply block; }
-  [data-theme="light"] .theme-icon.moon { @apply hidden; }
+  .theme-icon {
+    @apply bg-transparent leading-none;
+  }
+
+  [data-theme='dark'] .theme-icon.sun {
+    @apply hidden;
+  }
+  [data-theme='dark'] .theme-icon.moon {
+    @apply block;
+  }
+  [data-theme='light'] .theme-icon.sun {
+    @apply block;
+  }
+  [data-theme='light'] .theme-icon.moon {
+    @apply hidden;
+  }
+
+  /* hamburger tersembuny*/
+  .hamburger {
+    @apply flex lg:hidden;
+    @apply flex-col justify-center items-center gap-[5px];
+    @apply w-10 h-10 p-0 rounded-lg opacity-100;
+    @apply bg-transparent border-none cursor-pointer;
+  }
+
+  .hamburger span {
+    @apply block w-[22px] h-[2px] rounded-sm;
+    @apply bg-hfont transition-all duration-300 ease-in-out;
+  }
+
+  .desktop-only {
+    @apply hidden md:flex;
+  }
 }
 
 /* button */
-@layer base {
+
+@layer components {
   button {
- 
     @apply px-7 py-3 rounded-full bg-accent border-none cursor-pointer opacity-85;
-    
-    
     @apply transition-all duration-300;
   }
 
   button:hover {
     @apply opacity-100;
   }
-}
 
-@layer components {
   .button1 a,
   .button2 a {
-    @apply text-hfont text-[15px] font-semibold bg-transparent;
+    @apply text-white text-[15px] font-semibold bg-transparent;
   }
-
 
   .button2 {
-    @apply px-9 py-3.5;
+    @apply px-7 py-3 lg:px-9 lg:py-[14px];
   }
 }
 
-/* hidden hamburger */
-
-@layer components {
-  .hamburger {
-    @apply hidden flex-col justify-center items-center gap-1.25 w-10 h-10;
-    
-    @apply p-0 bg-transparent border-none cursor-pointer rounded-lg opacity-100;
-  }
-}
-
-/* three lined hamburger */
-
-@layer components {
-  /* Hamburger 3 garis */
-  .hamburger span {
-    /* Layout & Sizing */
-    @apply block w-5.5 h-0.5 rounded-xs;
-
-    @apply bg-hfont;
-
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  .desktop-only {
-    @apply flex;
-  }
-}
-
-/* slide out */
+/* slide-out */
 
 @layer components {
   .mobile-menu {
-    @apply fixed top-0 right-full w-[85%] max-w-85 h-screen z-2000 p-6;
+    @apply fixed top-0 right-[-100%] w-[85%] max-w-[340px] h-screen z-[2000] p-6;
     @apply flex flex-col border-l border-border bg-bg-card;
-    /* Custom Bezier for a smoother "premium" slide effect */
-    @apply transition-[right] duration-350ms ease-in-out}
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-  .mobile-menu.open { @apply right-0; }
+  .mobile-menu.open {
+    @apply right-0;
+  }
 
-  /* Header inside Menu */
   .mobile-menu-header {
     @apply flex items-center justify-between mb-10 bg-transparent;
   }
 
-  /* Close Button */
   .close-btn {
-    @apply bg-transparent border-none text-hfont text-[22px] cursor-pointer px-2 py-1 rounded-md opacity-70 transition-opacity duration-200;
+    @apply bg-transparent border-none text-hfont text-[22px] cursor-pointer;
+    @apply px-2 py-1 rounded-md opacity-70 transition-opacity duration-200;
   }
-  .close-btn:hover { @apply opacity-100; }
 
-  /* Navigation Links */
-  .mobile-nav ul { @apply list-none flex flex-col; }
-  .mobile-nav ul li { @apply border-b border-border; }
-  
+  .close-btn:hover {
+    @apply opacity-100;
+  }
+
+  .mobile-nav ul {
+    @apply list-none flex flex-col;
+  }
+
+  .mobile-nav ul li {
+    @apply border-b border-border;
+  }
+
   .mobile-nav ul li a {
-    @apply block py-4 px-1 text-[17px] font-normal text-hfont transition-colors duration-250 ease-in;
-   
+    @apply block py-[18px] px-1 text-[17px] font-normal text-hfont;
+    @apply transition-colors duration-300 ease-in;
   }
-  .mobile-nav ul li a:hover { @apply text-accent; }
 
-  /* CTA Button Area */
-  .mobile-cta { @apply mt-8 w-full; }
-  .mobile-cta a { @apply block w-full; }
+  .mobile-nav ul li a:hover {
+    @apply text-accent;
+  }
 
-  /* Background Overlay */
+  .mobile-cta {
+    @apply mt-8 w-full;
+  }
+
+  .mobile-cta a {
+    @apply block w-full;
+  }
+
   .overlay {
-    @apply fixed inset-0 z-1500 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-350 ease-in-out;
-  }
-  .overlay.active {
-    @apply opacity-100 pointer-events-auto; }
+    @apply fixed inset-0 z-[1500] bg-black/50 opacity-0 pointer-events-none;
+    @apply transition-opacity duration-300 ease-in-out;
   }
 
+  .overlay.active {
+    @apply opacity-100 pointer-events-auto;
+  }
+}
 
 /* hero */
 
 @layer components {
   .hero {
-    @apply w-full min-h-160 flex justify-center items-center overflow-hidden;
-
+    @apply w-full overflow-hidden flex justify-center;
+    @apply min-h-0 pt-12 items-start;
+    @apply md:min-h-[640px] md:pt-0 md:items-center;
     @apply bg-[linear-gradient(to_bottom,var(--color-bg)_30%,var(--color-hero-gradient-end))];
-    @apply transition-colors duration-300 ease-in-out;
+    @apply transition-[background] duration-300 ease-in-out;
   }
 
   .hero_container {
-    @apply w-[90%] max-w-300 flex items-center justify-between bg-transparent gap-10;
+    @apply w-full px-6 flex flex-col items-start gap-0 bg-transparent;
+    @apply md:w-[90%] md:max-w-[1200px] md:flex-row md:items-center md:justify-between md:gap-10 md:px-0;
   }
 
   .hero_content {
-    @apply flex-1 bg-transparent;
+    @apply w-full bg-transparent md:flex-1;
   }
 
   .hero_content h1 {
-    @apply text-[3.5rem] font-bold mb-5 leading-[1.1] text-hfont;
+    @apply text-[1.9rem] md:text-[2.8rem] lg:text-[3.5rem];
+    @apply font-bold leading-[1.1] text-hfont;
+    @apply mb-4 md:mb-5;
   }
 
   .hero_content h1 span {
@@ -214,58 +261,62 @@
   }
 
   .hero_content p {
-    @apply text-[1.1rem] leading-[1.7] mb-8 max-w-150 text-pfont;
+    @apply text-[0.95rem] leading-[1.7] mb-6 max-w-full text-pfont;
+    @apply md:text-[1.1rem] md:mb-8 md:max-w-[600px];
+  }
+
+  .button2 {
+    @apply w-full text-center md:w-auto;
   }
 
   .hero_image {
-    @apply flex-1 flex justify-end self-end bg-transparent;
+    @apply w-full flex justify-center bg-transparent;
+    @apply md:flex-1 md:justify-end md:self-end;
   }
 
   .hero_image img {
-    @apply max-w-full h-auto object-cover bg-transparent;
+    @apply w-[80%] max-w-[320px] mx-auto h-auto object-cover bg-transparent;
+    @apply md:w-full md:max-w-full md:mx-0;
   }
 }
 
-/* who we are section */
+/* who we are */
 
 @layer components {
-  /* Who We Are Section */
   .about {
-    @apply min-h-[40vh] flex justify-center items-center px-5 py-15;
-    @apply bg-bg transition-colors duration-300;
+    @apply min-h-[40vh] flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply px-6 py-[48px] md:py-[60px];
   }
 
   .about_container {
-    @apply w-[90%] max-w-225 text-center;
+    @apply w-[90%] max-w-[900px] text-center;
   }
 
   .about_content h2 {
-    @apply text-[2.2rem] font-bold mb-5 text-hfont;
+    @apply text-[1.8rem] md:text-[2.2rem] font-bold mb-5 text-hfont;
   }
 
   .about_content p {
-    @apply text-[1.5rem] font-medium leading-[1.6] text-pfont;
+    @apply text-[1.1rem] md:text-[1.5rem] font-medium leading-[1.6] text-pfont;
   }
 
   .about_content p span {
-    /* Using hfont for emphasized text inside paragraphs */
     @apply text-hfont font-semibold;
   }
 }
 
-/* what wae do */
+/* what we do */
 
 @layer components {
-  /* What We Do Section */
   .do {
-    @apply py-15 px-5 flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply py-[48px] px-4 md:py-[60px] md:px-5;
   }
 
   .do_container {
-    @apply w-[90%] max-w-275;
+    @apply w-full md:w-[90%] md:max-w-[1100px];
   }
 
-  /* Section Header */
   .header {
     @apply text-center bg-transparent;
   }
@@ -278,15 +329,15 @@
     @apply text-[1.1rem] mb-12 text-pfont;
   }
 
-  /* Grid Layout */
   .do_content {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+    @apply grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3;
   }
 
-  /* Card Component */
   .card {
-    @apply border border-border rounded-[14px] px-5 py-8 flex flex-col justify-center items-center text-center gap-4;
-    @apply bg-bg-card transition-all duration-300 ease-in-out;
+    @apply border border-border rounded-[14px] bg-bg-card;
+    @apply flex flex-col justify-center items-center text-center;
+    @apply gap-3 px-[10px] py-[18px] md:gap-4 md:px-5 md:py-8;
+    @apply transition-all duration-300 ease-in-out;
   }
 
   .card:hover {
@@ -294,24 +345,23 @@
   }
 
   .card img {
-    @apply w-16 h-16 object-contain bg-transparent;
+    @apply w-[52px] h-[52px] md:w-16 md:h-16 object-contain bg-transparent;
   }
 
   .card h3 {
-    @apply text-[1.1rem] font-semibold text-hfont;
+    @apply text-[0.95rem] md:text-[1.1rem] font-semibold text-hfont;
   }
 
   .card p {
-    @apply text-[0.95rem] leading-normal text-pfont;
+    @apply text-[0.85rem] md:text-[0.95rem] leading-[1.5] text-pfont;
   }
 }
 
-/* porto */
+/* portfolio */
 
 @layer components {
-  /* Portfolio Section */
   #our_work {
-    @apply py-15 px-5 bg-bg transition-colors duration-300;
+    @apply py-[48px] px-4 md:py-[60px] md:px-5 bg-bg transition-colors duration-300;
   }
 
   .our_head {
@@ -326,31 +376,30 @@
     @apply text-[1.1rem] text-pfont;
   }
 
-  /* Portfolio Grid/Flex Wrapper */
   .porto {
-    @apply flex justify-center flex-wrap gap-6 px-10;
+    @apply flex justify-center flex-wrap gap-8 px-2 md:gap-6 md:px-10;
+    @apply flex-col items-center md:flex-row md:items-start;
   }
 
-  /* Individual Portfolio Items */
   .porto > div {
-    @apply flex-1 min-w-55 max-w-95 bg-transparent;
+    @apply w-full max-w-full bg-transparent md:flex-1 md:min-w-[220px] md:max-w-[380px];
   }
 
   .porto > div h3 {
-    @apply text-[1.1rem] font-bold mt-3.5 text-hfont;
+    @apply text-[1.1rem] font-bold mt-[14px] text-hfont;
   }
 
-  /* The Image Card */
   .porto_card {
-    @apply rounded-[14px] w-full object-cover;
-    @apply border border-border;
+    @apply rounded-[14px] w-full object-cover border border-border;
   }
 }
 
+/* meet the team */
+
 @layer components {
-  /* Meet the Team Section */
   .section5 {
-    @apply py-25 px-5 bg-bg transition-colors duration-300;
+    @apply py-[48px] px-4 md:py-[100px] md:px-5;
+    @apply bg-bg transition-colors duration-300;
   }
 
   .team_head {
@@ -365,26 +414,23 @@
     @apply text-[1.2rem] text-pfont;
   }
 
-  /* Team Grid/Flex Wrapper */
+  /* mobile */
   .staff {
-    @apply flex justify-center items-start gap-20 flex-wrap max-w-275 mx-auto;
+    @apply grid grid-cols-2 gap-10 justify-items-center max-w-[1100px] mx-auto;
+    @apply md:flex md:justify-center md:items-start md:gap-20 md:flex-wrap;
   }
 
-  /* Individual Team Member */
   .staff > div {
     @apply flex flex-col items-center text-center bg-transparent;
   }
 
-  /* Profile Picture */
   .staff > div img {
-    @apply w-50 h-50 rounded-full object-cover;
-    /* Optional: subtle border for light mode visibility */
-    @apply border-2 border-border;
+    @apply w-[110px] h-[110px] md:w-[130px] md:h-[130px] lg:w-[200px] lg:h-[200px];
+    @apply rounded-full object-cover border-2 border-border;
   }
 
-  /* Name and Role */
   .staff > div h3 {
-    @apply text-[1.2rem] font-bold mt-4.5 mb-1.5 text-hfont;
+    @apply text-[1.2rem] font-bold mt-[18px] mb-[6px] text-hfont;
   }
 
   .staff > div p {
@@ -392,25 +438,26 @@
   }
 }
 
+/* form */
+
 @layer components {
-  /* Contact Form Section */
   .section6 {
-    @apply py-20 px-5 flex justify-center items-center bg-bg transition-colors duration-300;
+    @apply py-[48px] px-5 md:py-20 flex justify-center items-center;
+    @apply bg-bg transition-colors duration-300;
   }
 
   .form {
-    @apply w-full max-w-[560] text-center bg-transparent;
+    @apply w-full max-w-[560px] text-center bg-transparent;
   }
 
   .form h2 {
-    @apply text-[2.2rem] font-bold mb-2.5 text-hfont;
+    @apply text-[1.8rem] md:text-[2.2rem] font-bold mb-2.5 text-hfont;
   }
 
   .form > p {
     @apply text-[1.1rem] mb-10 text-pfont;
   }
 
-  /* Fieldset Reset */
   .form form fieldset {
     @apply border-none text-left;
   }
@@ -419,40 +466,37 @@
     @apply flex flex-col gap-1.5;
   }
 
-  /* Form Labels */
   .form form fieldset label {
-    @apply text-[14px] font-medium mt-3.5 text-pfont;
-    /* Note: Using text-pfont ensures labels are readable in both modes */
+    @apply text-[14px] font-medium mt-3.5 text-hfont;
   }
 
-  /* Input & Textarea Styling */
   .form form fieldset input,
   .form form fieldset textarea {
     @apply px-4 py-3 border border-border rounded-lg w-full text-[14px] outline-none;
-    @apply bg-bg-card text-hfont transition-all duration-300 ease-in-out;
+    @apply bg-bg-input text-hfont transition-all duration-300 ease-in-out;
   }
 
-  /* Focus States */
   .form form fieldset input:focus,
   .form form fieldset textarea:focus {
     @apply border-accent;
   }
 
   .form form fieldset textarea {
-    @apply resize-y min-h-30;
+    @apply resize-y min-h-[120px];
   }
 
-  /* Submit Button (button3) */
   .button3 {
-    @apply w-full mt-6 p-3.5 text-[16px] font-semibold text-white rounded-[50px] bg-accent;
+    @apply w-full mt-6 p-[14px] text-[16px] font-semibold text-white rounded-[50px] bg-accent;
     @apply transition-opacity duration-200 hover:opacity-90;
   }
 }
 
+/* footer */
+
 @layer components {
-  /* Footer Section */
   footer {
-    @apply text-center py-6 px-4 border-t border-border bg-bg transition-colors duration-300;
+    @apply text-center py-6 px-4 border-t border-border;
+    @apply bg-[var(--color-footer-bg)] transition-colors duration-300;
   }
 
   footer p {
